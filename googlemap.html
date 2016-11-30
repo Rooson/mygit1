@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <style type="text/css">
+    html,
+    body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+    }
+    
+    #map {
+      height: 100%;
+    }
+  </style>
+</head>
+
+<body>
+  <div id="map"></div>
+  <script type="text/javascript">
+    var map;
+
+    function initMap() {
+      var myPos = {
+        lat: 25.0339031,
+        lng: 121.5623212
+      };
+
+      map = new google.maps.Map(document.getElementById('map'), {
+        center: myPos,
+        zoom: 15 //Zoom in 
+      });
+
+      var marker = new google.maps.Marker({
+        position: myPos,
+        title: 'Hello World!'
+      });
+
+      marker.setMap(map);
+
+      //line path    
+      var flightPlanCoordinates = [{
+        lat: 25.0339031,
+        lng: 121.5623212
+      }, {
+        lat: 25.07372,
+        lng: 121.578239
+      }];
+
+      var flightPath = new google.maps.Polyline({
+        path: flightPlanCoordinates,
+        geodesic: true,
+        strokeColor: '#FF0000',
+        strokeOpacity: 1.0,
+        strokeWeight: 2
+      });
+
+      flightPath.setMap(map);
+        
+      //circle range
+      var citymap = {
+          taipei: {
+            center: myPos,
+            population: 300
+          }
+        };   
+        
+        for (var city in citymap) {
+            // Add the circle for this city to the map.
+            var cityCircle = new google.maps.Circle({
+              strokeColor: '#FF0000',
+              strokeOpacity: 0.8,
+              strokeWeight: 2,
+              fillColor: '#FF0000',
+              fillOpacity: 0.35,
+              map: map,
+              center: citymap[city].center,
+              radius: Math.sqrt(citymap[city].population) * 100
+            });
+          }        
+    }
+  </script>
+  <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAYDuitz0kp9hOaDTQgpy_SUEh9x4SDVg4&callback=initMap">
+    //Google console API, active javascript API.
+  </script>
+</body>
+
+</html>
