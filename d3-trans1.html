@@ -1,0 +1,29 @@
+
+<!DOCTYPE html>
+<html lang="tw">
+
+<head>
+  <meta charset="UTF-8">
+  <title>D3.js - trans</title>
+  <script src="http://d3js.org/d3.v3.min.js"></script>
+
+</head>
+
+<body>
+  <script>
+		var svgContainer = d3.select("body").append("svg")
+																				.attr("width", 200)
+																				.attr("height", 200);	
+		svgContainer.append("rect")
+								.attr({ x: 10, y: 10, width: 20, height: 20, fill: "red"})
+								.transition()
+								.delay(500)						
+								.attr({x: 20, y: 20, width: 100, height: 10, fill: "black"})
+								.duration(3000);
+								
+d3.selectAll("p").transition().style("color","blue");			
+  </script>
+
+</body>
+<p> 2222 </p>
+</html>
